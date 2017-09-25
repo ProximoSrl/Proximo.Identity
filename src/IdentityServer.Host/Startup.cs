@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using IdentityModel;
+﻿using System.Security.Cryptography;
+using IdentityServer4.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using QuickstartIdentityServer;
 
 namespace IdentityServer.Host
 {
@@ -28,9 +23,11 @@ namespace IdentityServer.Host
             services.AddMvc();
 
             // temp credential
-            RsaSecurityKey rsaSecurityKey = (RsaSecurityKey)null ?? new RsaSecurityKey(RSA.Create());
-            rsaSecurityKey.KeyId = CryptoRandom.CreateUniqueId(16);
-            SigningCredentials credential = new SigningCredentials((SecurityKey)rsaSecurityKey, "RS256");
+            var rsaSecurityKey = new RsaSecurityKey(RSA.Create())
+            {
+                KeyId = "change-me".Sha256()
+            };
+            var credential = new SigningCredentials(rsaSecurityKey, "RS256");
 
             // configure identity server with in-memory stores, keys, clients and scopes
             services.AddIdentityServer()

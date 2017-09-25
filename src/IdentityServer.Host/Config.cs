@@ -1,14 +1,13 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
+using IdentityServer.Host.Identity;
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
-using System.Collections.Generic;
-using System.Security.Claims;
-using IdentityServer4.Quickstart.UI;
 
-namespace QuickstartIdentityServer
+namespace IdentityServer.Host
 {
     public class Config
     {
